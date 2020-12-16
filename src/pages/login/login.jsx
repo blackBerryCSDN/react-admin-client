@@ -1,10 +1,11 @@
 /*用户登陆的路由组件 */
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {reqLogin} from "../../api";
 import memory from '../../utils/memory'
-import storage from '../../utils/storage'
+import {saveUser} from '../../utils/storage'
 
 import logo from '../../assets/images/logo.png'
 import './login.less'
@@ -13,16 +14,18 @@ const Item = Form.Item
 class Login extends React.Component{
     // 表单提交
     onFinish = async values=> {
+        // 请求登陆
         const {username, password} = values;
         const response = await reqLogin(username, password)
-        console.log(response);
+        // console.log(response);
         if (response.status === 0) {
+            // 保存user
             const user = response.data;
-            memory.user = user;
-            storage.saveUser(user)
+            memory.user = user; // 保存在内存中
+            saveUser(user); // 保存到local中
             message.success('登录成功');
             setTimeout( () => {
-                this.props.history.replace('/')
+                this.props.history.replace('/') // 跳转到管理界面 (不需要再回退回到登陆)
             }, 1000)
         }else {
             message.error(response.msg)
@@ -52,6 +55,12 @@ class Login extends React.Component{
     };
 
     render() {
+        // 如果用户已经登陆, 自动跳转到管理界面
+        const user = memory.user
+        if (user && user._id) {
+            return <Redirect to='/' />
+        }
+
         return (
             <div className='login'>
                 <header className='login-header'>

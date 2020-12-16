@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 
 import App from './App'
 import memory from './utils/memory'
-import storage from './utils/storage'
+import {getUser} from './utils/storage'
 
 // 读取local中保存user, 保存到内存中
-const user = storage.getUser()
+const user = getUser();
 if (user && user._id) {
     memory.user = user
 }
