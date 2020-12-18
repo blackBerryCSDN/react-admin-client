@@ -24,9 +24,7 @@ class Login extends React.Component{
             memory.user = user; // 保存在内存中
             saveUser(user); // 保存到local中
             message.success('登录成功');
-            setTimeout( () => {
-                this.props.history.replace('/') // 跳转到管理界面 (不需要再回退回到登陆)
-            }, 1000)
+            this.props.history.replace('/') // 跳转到管理界面 (不需要再回退回到登陆)
         }else {
             message.error(response.msg)
         }

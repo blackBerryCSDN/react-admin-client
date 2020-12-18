@@ -70,7 +70,6 @@ class LeftNav extends React.Component{
     render() {
         const path = this.props.location.pathname;
         const openKey = this.openKey;
-        console.log(openKey);
         return (
             <div className="left-nav">
                 <Link to='/' className="left-nav-header">
