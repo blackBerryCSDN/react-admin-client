@@ -11,6 +11,15 @@ export const reqAddUser = (user) => ajax('/manage/user/add', user, 'POST')
 // 获取分类列表
 export const reqCategorys = (parentId) => ajax('/manage/category/list', {parentId})
 
+// 添加分类
+export const reqAddCategorys = (parentId, categoryName) => ajax('/manage/category/add', {parentId, categoryName}, 'POST')
+
+// 修改分类
+export const reqUpdateCategorys = (categoryId, categoryName) => ajax('/manage/category/update', {categoryId, categoryName}, 'POST')
+
+// 获取角色列表
+export const reqRoleList = () => ajax('/manage/role/list')
+
 /*
 json请求的接口请求函数
  */
@@ -48,3 +57,4 @@ export const reqWeather =  city => {
         })
     })
 }
+
