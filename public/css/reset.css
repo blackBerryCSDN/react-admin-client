@@ -88,5 +88,5 @@ html, body {
     height: 100%;
 }
 .ant-card-bordered {
-    border: none;
+    border: none!important;
 }
